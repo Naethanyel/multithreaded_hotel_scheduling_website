@@ -25,20 +25,25 @@ export class AppComponent implements OnInit{
   currentCheckOutVal!:string;
 
   welcome!:string;
+  time!:string;
 
   getWelcome():Observable<string> {
     let fileURl = this.baseURL + '/welcome';
     return this.httpClient.get(fileURl,{responseType:'text'});
   }
 
+   getTime():Observable<string> {
+      let fileURl = this.baseURL + '/time';
+      return this.httpClient.get(fileURl,{responseType:'text'});
+    }
+
     ngOnInit(){
-    this.getWelcome().subscribe(data=>{this.welcome=data.replace( /[{}\[\]"()\\\/]/g, "" )});
+    this.getWelcome().subscribe(data=>{this.welcome=data.replace( /[{}\[\]"()\\\/]/g, "" ).substring(8)});
+    this.getTime().subscribe(data=>{this.time=data.replace( /[{}\[\]"()\\\/]/g, "" ).substring(5)});
       this.roomsearch= new FormGroup({
         checkin: new FormControl(' '),
         checkout: new FormControl(' ')
       });
-
- //     this.rooms=ROOMS;
 
 
     const roomsearchValueChanges$ = this.roomsearch.valueChanges;
@@ -77,10 +82,6 @@ export class AppComponent implements OnInit{
         .subscribe(res => console.log(res));
     }
 
-  /*mapRoom(response:HttpResponse<any>): Room[]{
-    return response.body;
-  }*/
-
     getAll(): Observable<any> {
 
 
@@ -89,15 +90,10 @@ export class AppComponent implements OnInit{
 
   }
 
-
-
 export interface Roomsearch{
     checkin:string;
     checkout:string;
   }
-
-
-
 
 export interface Room{
   id:string;
@@ -121,25 +117,4 @@ export class ReserveRoomRequest {
   }
 }
 
-/*
-var ROOMS: Room[]=[
-  {
-  "id": "13932123",
-  "roomNumber" : "409",
-  "price" :"20",
-  "links" : ""
-},
-{
-  "id": "139324444",
-  "roomNumber" : "509",
-  "price" :"30",
-  "links" : ""
-},
-{
-  "id": "139324888",
-  "roomNumber" : "609",
-  "price" :"40",
-  "links" : ""
-}
-] */
 
