@@ -1,9 +1,9 @@
 package edu.wgu.d387_sample_code;
 
+import edu.wgu.d387_sample_code.model.response.TimeResponse;
 import edu.wgu.d387_sample_code.model.response.WelcomeResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 
@@ -29,6 +29,9 @@ public class D387SampleCodeApplication {
 				e.printStackTrace();
 			}
 		});
+
+		TimeResponse.getTimeResponse();
+
 	}
 
 }
