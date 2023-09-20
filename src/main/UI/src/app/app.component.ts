@@ -28,7 +28,14 @@ export class AppComponent implements OnInit{
   currentCheckInVal!:string;
   currentCheckOutVal!:string;
 
+  welcome!:string;
+
+  getWelcome():Observable<string> {
+  let fileURl = this.baseURL + '/welcome';
+  return this.httpClient.get(fileURl,{responseType:'text'}); }
+
     ngOnInit(){
+    this.getWelcome().subscribe(data=>{this.welcome=data});
       this.roomsearch= new FormGroup({
         checkin: new FormControl(' '),
         checkout: new FormControl(' ')

@@ -1,11 +1,9 @@
 package edu.wgu.d387_sample_code;
 
-import edu.wgu.d387_sample_code.international.DisplayMessage;
+import edu.wgu.d387_sample_code.model.response.WelcomeResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.io.ClassPathResource;
 
-import java.io.InputStream;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 
@@ -19,14 +17,14 @@ public class D387SampleCodeApplication {
 		Properties properties=new Properties();
 		messageExecutor.execute(()-> {
 			try {
-				DisplayMessage.getWelcomeMessage(properties, "welcome_resources_en_US.properties");
+				WelcomeResponse.getWelcomeMessage(properties, "welcome_resources_en_US.properties");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
 		messageExecutor.execute(()-> {
 			try {
-				DisplayMessage.getWelcomeMessage(properties, "welcome_resources_fr_CA.properties");
+				WelcomeResponse.getWelcomeMessage(properties, "welcome_resources_fr_CA.properties");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
