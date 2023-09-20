@@ -4,10 +4,6 @@ import {HttpClient, HttpResponse,HttpHeaders} from "@angular/common/http";
 import { Observable } from 'rxjs';
 import {map} from "rxjs/operators";
 
-
-
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -31,11 +27,12 @@ export class AppComponent implements OnInit{
   welcome!:string;
 
   getWelcome():Observable<string> {
-  let fileURl = this.baseURL + '/welcome';
-  return this.httpClient.get(fileURl,{responseType:'text'}); }
+    let fileURl = this.baseURL + '/welcome';
+    return this.httpClient.get(fileURl,{responseType:'text'});
+  }
 
     ngOnInit(){
-    this.getWelcome().subscribe(data=>{this.welcome=data});
+    this.getWelcome().subscribe(data=>{this.welcome=data.replace( /[{}\[\]"()\\\/]/g, "" )});
       this.roomsearch= new FormGroup({
         checkin: new FormControl(' '),
         checkout: new FormControl(' ')
